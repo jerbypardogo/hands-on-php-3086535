@@ -1,7 +1,19 @@
 <?php
 
 function update_record($mysqli) {
+	// Extract submitted form values into local variables.
+	extract ($_POST);
+	// Sanitize text fields before building the query.
+	$bio = filter_var($bio, FILTER_SANITIZE_ADD_SLASHES);
+	$desc = filter_var($desc, FILTER_SANITIZE_ADD_SLASHES);
 
+	$query = "UPDATE speakers SET name='$name', 
+	bio='$bio', 
+	session_name='$session_name', 
+	session_desc='$desc' 
+	WHERE name='$name';";
+
+	return $mysqli->query($query);
 }
 
 $host = '127.0.01';
