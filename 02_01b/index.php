@@ -12,4 +12,4 @@ do {
 array_pop($choices);
 
 // Pick a random choice from the remaining options.
-echo 'And the deicsion is: ' . $choices[array_rand($choices)];
+echo 'And the decision is: ' . $choices[array_rand($choices)];
