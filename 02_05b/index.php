@@ -7,10 +7,35 @@ function print_array($a) {
 }
 
 
+ // Sanitize form input values before processing.
  function sanitize_form() {
-
+	// Debug output for the raw POST data.
+	print_array($_POST);
+	foreach ($_POST as $name => $value) {
+		switch ($name) {
+			case 'email':
+				// Sanitize email input specifically.
+				$value = filter_var($value, FILTER_SANITIZE_EMAIL);
+				break;
+			case 'message':
+				// Escape HTML and add slashes to preserve message input safely.
+				$value = filter_var(htmlspecialchars($value), FILTER_SANITIZE_ADD_SLASHES);
+				break;
+			default:
+				// Remove unsupported characters for other text inputs.
+				$value = filter_var(preg_replace('/[^a-zA-Z0-9\s]/', '', $value), FILTER_SANITIZE_ADD_SLASHES);
+		}
+		$_POST[$name] = $value;
+	}
 	return true;
  }
+
+ // Run form sanitization when the form is submitted.
+ if ( isset($_POST['submit']) ) {
+	 sanitize_form();
+	 print_array($_POST);
+ }
+
 ?>
 
 <!DOCTYPE html>
