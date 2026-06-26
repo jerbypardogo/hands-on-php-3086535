@@ -1,5 +1,8 @@
 <?php
 
+// Define a dedicated namespace for kindergarten-specific helpers.
+namespace kindergarten;
+
 function first_day_of_school() {
 	return date('l F j, Y h:i a', mktime(8, 25, 0, 8, 30, 2022));
 }
@@ -19,3 +22,7 @@ function average($grades) {
 function has_honors($gpa) {
 	return true;
 }
+
+// Output kindergarten-specific header and start date for this namespace.
+echo '<h2>Kindergarten</h2>';
+echo first_day_of_school() . '<br />';
